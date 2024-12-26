@@ -31,7 +31,13 @@ app.get("/", (req,res)=>{
 
 const server = new ApolloServer({
     typeDefs : typedefs,
-    resolvers : resolvers
+    resolvers : resolvers,
+    context: ({ req }) => {
+        // Extract the token from the Authorization header
+        const token = req.headers.authorization || "";
+        // Pass token in context
+        return { token };
+      },
 });
 
 const startApolloServer  =async()=>{

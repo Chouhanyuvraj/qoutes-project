@@ -3,6 +3,7 @@ import Quote from "../models/qoute.js";
 import bycrpt from "bcrypt";
 import pkg from 'jsonwebtoken';
 const { sign } = pkg;
+import authenticate from "../middleware/auth.js";
 
 // const Quote = [
 //     {
@@ -55,9 +56,13 @@ const { sign } = pkg;
 
 const resolvers = {
     Query: {
-        quotes: async () => {
+        quotes: async (_ , args) => {
+            console.log(args , "argsargsargsargs");
+            const authCheck = await authenticate(token);
+            if(!authCheck){
+                 throw new Error('Unothorized user!!!');
+            }
            return await Quote.find();
-
         },
         users: async () => {
            return await User.find();
