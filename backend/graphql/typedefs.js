@@ -12,14 +12,20 @@ type Quote {
     by:ID!
 }
 
+type Token {
+  token : String!
+  user : User
+}
+
 type Query {
     quotes: [Quote]
     users: [User]
   }
 
   type Mutation {
-    addQuote(quote: String!, author: String!): Quote
-    addUser(firstName: String!, lastName: String!, email: String!): User
+    addQuote(name: String!, by: ID!): Quote
+    registerUser(firstName: String!, lastName: String!, email: String! , password:String!): User
+    loginUser(email:String! , password:String!):Token
   }
 `
 

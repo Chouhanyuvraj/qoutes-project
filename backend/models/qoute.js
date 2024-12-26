@@ -1,5 +1,6 @@
 
 import mongoose from "mongoose";
+import User from "./user.js";
 
 const quoteSchema = new mongoose.Schema({
     name : {
@@ -14,4 +15,5 @@ const quoteSchema = new mongoose.Schema({
 
 const Quote = mongoose.model("Quote", quoteSchema); 
 
-export default Quote
+export default Quote;
+
